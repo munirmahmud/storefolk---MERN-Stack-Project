@@ -35,7 +35,7 @@ const Register = () => {
 
                     <form onSubmit={handleSubmit}>
                         <input type="email"
-                            className="form-control"
+                            className="form-control mb-3"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             autoFocus
