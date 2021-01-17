@@ -7,7 +7,6 @@ server/node_modules
 .pnp.js
 client/.eslintcache
 client/.env
-client/src/config
 server/.eslintcache
 
 # testing
