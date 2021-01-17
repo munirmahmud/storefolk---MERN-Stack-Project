@@ -2,13 +2,14 @@ import { HomeOutlined, LogoutOutlined, ShoppingOutlined, UserAddOutlined, UserOu
 import { Menu } from 'antd';
 import firebase from 'firebase';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const Header = () => {
     const [current, setCurrent] = useState("home");
     const dispatch = useDispatch();
+    const {user} = useSelector(state => ({ ...state }));
     const history = useHistory();
 
     const { SubMenu, Item } = Menu;
@@ -42,19 +43,27 @@ const Header = () => {
                 <Link to="/shop">Shop</Link>
             </Item>
 
-            <Item key="register" icon={<UserAddOutlined />} className="float-right">
-                <Link to="/register">Register</Link>
-            </Item>
-            <Item key="login" icon={<UserOutlined />} className="float-right">
-                <Link to="/login">Login</Link>
-            </Item>
+            {!user && (
+                <>
+                    <Item key="register" icon={<UserAddOutlined />} className="float-right">
+                        <Link to="/register">Register</Link>
+                    </Item>
+                    <Item key="login" icon={<UserOutlined />} className="float-right">
+                        <Link to="/login">Login</Link>
+                    </Item>
+                </>
+            )}
 
             {/* Drop down menu */}
-            <SubMenu key="user" icon={<UserOutlined />} title="Munir Mahmud">
-                <Item key="dashboard">Dashboard</Item>
-                <Item key="history">History</Item>
-                <Item key="logout" icon={<LogoutOutlined />} onClick={logOut}>Logout</Item>
-            </SubMenu>
+            {user && (
+                <>
+                    <SubMenu key="user" icon={<UserOutlined />} className="float-right" title={user.email && user.email.split("@")[0]}>
+                        <Item key="dashboard">Dashboard</Item>
+                        <Item key="history">History</Item>
+                        <Item key="logout" icon={<LogoutOutlined />} onClick={logOut}>Logout</Item>
+                    </SubMenu>
+                </>
+            )}
         </Menu>
     );
 };
