@@ -6,6 +6,8 @@ server/node_modules
 /.pnp
 .pnp.js
 client/.eslintcache
+client/.env
+client/src/config
 server/.eslintcache
 
 # testing
