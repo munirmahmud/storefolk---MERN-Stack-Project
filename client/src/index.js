@@ -2,16 +2,25 @@ import 'antd/dist/antd.min.css';
 import 'bootstrap-material-design/dist/css/bootstrap-material-design.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import App from './App';
 import './index.css';
+import rootReducer from './reducers';
 import reportWebVitals from './reportWebVitals';
+
+
+const store = createStore(rootReducer, composeWithDevTools());
 
 ReactDOM.render(
   // <React.StrictMode>
+  <Provider store={store}>
     <Router>
       <App />
-    </Router>,
+    </Router>
+  </Provider>,
   // </React.StrictMode>,
   document.getElementById('root')
 );
