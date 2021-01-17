@@ -1,16 +1,36 @@
-import { HomeOutlined, ShoppingOutlined, UserAddOutlined, UserOutlined } from '@ant-design/icons';
+import { HomeOutlined, LogoutOutlined, ShoppingOutlined, UserAddOutlined, UserOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
+import firebase from 'firebase';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Header = () => {
     const [current, setCurrent] = useState("home");
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     const { SubMenu, Item } = Menu;
 
     // Select the active menu
     const handleClick = (e) => {
         setCurrent(e.key);
+    };
+
+    const logOut = () => {
+        firebase.auth().signOut().then(() => {
+            toast.success("You successfully logged out");
+        }).catch((error) => {
+            toast.error(error.message);
+        });
+
+        dispatch({
+            type: "LOGOUT",
+            payload: null,
+        });
+
+        history.push('/');
     };
 
     return (
@@ -33,6 +53,7 @@ const Header = () => {
             <SubMenu key="user" icon={<UserOutlined />} title="Munir Mahmud">
                 <Item key="dashboard">Dashboard</Item>
                 <Item key="history">History</Item>
+                <Item key="logout" icon={<LogoutOutlined />} onClick={logOut}>Logout</Item>
             </SubMenu>
         </Menu>
     );
