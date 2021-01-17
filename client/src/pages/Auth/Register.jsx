@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
+import { toast } from 'react-toastify';
 import { auth } from '../../config/firebase';
 
 const Register = () => {
@@ -8,6 +7,9 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if(email === "") return;
+
         const config = {
             url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
             handleCodeInApp: true,
@@ -23,16 +25,13 @@ const Register = () => {
 
         // Remove the existing value
         setEmail("");
-
     };
 
     return (
         <div className="container">
             <div className="row">
-                <div className="col-md-6 offset-3">
+                <div className="col-md-6 offset-3 mt-5">
                     <h3 className="text-center">Register</h3>
-
-                    <ToastContainer />
 
                     <form onSubmit={handleSubmit}>
                         <input type="email"
