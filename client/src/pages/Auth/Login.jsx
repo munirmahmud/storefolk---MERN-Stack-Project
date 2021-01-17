@@ -1,9 +1,9 @@
-import { MailOutlined } from '@ant-design/icons';
+import { GoogleOutlined, MailOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import { auth } from '../../config/firebase';
+import { auth, googleAuthProvider } from '../../config/firebase';
 
 
 const Login = ({ history }) => {
@@ -38,11 +38,31 @@ const Login = ({ history }) => {
         }
     };
 
+    const googleLogin = async () => {
+        await auth.signInWithPopup(googleAuthProvider).then(async (result) => {
+            const {user} = result;
+            const idTokenResult = await user.getIdTokenResult();
+
+            dispatch({
+                type: "LOGGED_IN_USER",
+                payload: {
+                  name: user.email,
+                  token: idTokenResult.token,
+                }
+            });
+
+            history.push("/");
+        }).catch((error) => {
+            toast.error(error.message);
+            console.log(error.message);
+        });
+    };
+
     return (
         <div className="container">
             <div className="row">
                 <div className="col-md-6 offset-3 mt-5">
-                    <h3 className="text-center">Login</h3>
+                    {loading ? <h3 className="text-center danger">Login...</h3> : <h3 className="text-center">Login</h3>}
 
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
@@ -65,7 +85,6 @@ const Login = ({ history }) => {
 
                         <Button 
                         type="primary" 
-                        className="mb-3" 
                         onClick={handleSubmit}
                         block
                         shape="round"
@@ -73,14 +92,17 @@ const Login = ({ history }) => {
                         size="large"
                         disabled={!email || password.length < 6}
                         >Login with Email/Password</Button>
-                        <Button 
-                        type="submit" 
-                        className="mb-3" 
-                        onClick={handleSubmit}
-                        block
-                        shape
-                        >Login with Google</Button>
                     </form>
+
+                    <Button 
+                        type="primary"
+                        onClick={googleLogin}
+                        block
+                        shape="round"
+                        size="large"
+                        danger
+                        icon={<GoogleOutlined />}
+                        >Login with Google</Button>
                 </div>
             </div>
         </div>
