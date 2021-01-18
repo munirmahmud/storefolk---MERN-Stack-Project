@@ -1,7 +1,7 @@
 import { GoogleOutlined, MailOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { auth, googleAuthProvider } from '../../config/firebase';
@@ -12,6 +12,11 @@ const Login = ({ history }) => {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     let dispatch = useDispatch();
+    const { user } = useSelector(state => ({...state}));
+
+    useEffect(() => {
+        if(user && user.token) history.push("/");
+    }, [user]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
