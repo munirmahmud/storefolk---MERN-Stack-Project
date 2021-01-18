@@ -5,6 +5,7 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const {readdirSync} = require('fs');
 
 const app = express();
 
@@ -27,6 +28,9 @@ app.use(cors());
 app.get('/', (req, res) => {
     res.send("Home Page")
 });
+
+//Autoload Routes
+readdirSync('./routes/').map((route) => app.use('/api', require(`./routes/${route}`)));
 
 app.listen(process.env.PORT, () => {
     console.log(`Server connected on port ${process.env.PORT}: http://localhost:${process.env.PORT}`);
