@@ -2,6 +2,7 @@ import { GoogleOutlined, MailOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { auth, googleAuthProvider } from '../../config/firebase';
 
@@ -101,8 +102,11 @@ const Login = ({ history }) => {
                         shape="round"
                         size="large"
                         danger
+                        className="mb-3"
                         icon={<GoogleOutlined />}
                         >Login with Google</Button>
+
+                        <Link to="/forgot/password" className="float-right text-danger">Forgot Password</Link>
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import Header from './components/Nav/Header';
 import { auth } from './config/firebase';
+import ForgotPassword from './pages/Auth/ForgotPassword';
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 import RegisterComplete from './pages/Auth/RegisterComplete';
@@ -44,6 +45,7 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/register/complete" component={RegisterComplete} />
+        <Route exact path="/forgot/password/" component={ForgotPassword} />
       </Switch>
     </>
   );
