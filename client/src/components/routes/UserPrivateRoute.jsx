@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Route } from 'react-router-dom';
+import LoadingToRedirect from './LoadingToRedirect';
 
 const UserPrivateRoute = ({children, ...rest}) => {
     const { user } = useSelector(state => ({ ...state }));
@@ -13,10 +14,10 @@ const UserPrivateRoute = ({children, ...rest}) => {
                     render={() => children}
                 />
             ) : (
-                <h1 className="text-danger">Loading...</h1>
+                <LoadingToRedirect />
             )}
         </>
     )
 }
 
-export default UserPrivateRoute
+export default UserPrivateRoute;
