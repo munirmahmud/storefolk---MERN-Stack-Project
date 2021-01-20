@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import Header from './components/Nav/Header';
+import UserPrivateRoute from './components/routes/UserPrivateRoute';
 import { auth } from './config/firebase';
 import { currentUser } from './helpers';
 import ForgotPassword from './pages/Auth/ForgotPassword';
@@ -55,7 +56,7 @@ function App() {
         <Route exact path="/register" component={Register} />
         <Route exact path="/register/complete" component={RegisterComplete} />
         <Route exact path="/forgot/password" component={ForgotPassword} />
-        <Route exact path="/user/history" component={History} />
+        <UserPrivateRoute exact path="/user/history" component={History} />
       </Switch>
     </>
   );
