@@ -41,7 +41,7 @@ const Login = ({ history }) => {
                         }
                     });
                 })
-                .catch((error) => {});
+                .catch((error) => console.log(error));
 
               history.push("/");
         } catch (error) {

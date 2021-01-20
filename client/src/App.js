@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import Header from './components/Nav/Header';
 import { auth } from './config/firebase';
+import { currentUser } from './helpers';
 import ForgotPassword from './pages/Auth/ForgotPassword';
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
@@ -21,14 +22,20 @@ function App() {
       if(user) {
         let idTokenResult = await user.getIdTokenResult();
 
-        dispatch({
-          type: "LOGGED_IN_USER",
-          payload: {
-            name: user.name,
-            email: user.email,
-            token: idTokenResult.token,
-          }
-        });        
+        currentUser(idTokenResult.token)
+            .then((res) => {
+                dispatch({
+                    type: "LOGGED_IN_USER",
+                    payload: {
+                        _id: res.data._id,
+                        name: res.data.name,
+                        email: res.data.email,
+                        token: idTokenResult.token,
+                        role: res.data.role,
+                    }
+                });
+            })
+            .catch((error) => console.log(error));       
       }
     });
 
