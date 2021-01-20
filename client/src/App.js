@@ -11,6 +11,7 @@ import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 import RegisterComplete from './pages/Auth/RegisterComplete';
 import Home from './pages/Home';
+import History from './pages/user/History';
 
 
 function App() {
@@ -53,7 +54,8 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/register/complete" component={RegisterComplete} />
-        <Route exact path="/forgot/password/" component={ForgotPassword} />
+        <Route exact path="/forgot/password" component={ForgotPassword} />
+        <Route exact path="/user/history" component={History} />
       </Switch>
     </>
   );
