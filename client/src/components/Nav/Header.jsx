@@ -57,7 +57,7 @@ const Header = () => {
             {/* Drop down menu */}
             {user && (
                 <>
-                    <SubMenu key="user" icon={<UserOutlined />} className="float-right" title={user.email && user.email.split("@")[0]}>
+                    <SubMenu key="user" icon={<UserOutlined />} className="float-right" title={user?.name}>
                         <Item key="dashboard">Dashboard</Item>
                         <Item key="history">History</Item>
                         <Item key="logout" icon={<LogoutOutlined />} onClick={logOut}>Logout</Item>
