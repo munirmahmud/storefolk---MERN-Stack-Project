@@ -4,9 +4,11 @@ import { Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import Header from './components/Nav/Header';
+import AdminRoute from './components/routes/AdminRoute';
 import UserPrivateRoute from './components/routes/UserPrivateRoute';
 import { auth } from './config/firebase';
 import { currentUser } from './helpers';
+import AdminDashboard from './pages/admin/AdminDashboard';
 import ForgotPassword from './pages/Auth/ForgotPassword';
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
@@ -44,7 +46,7 @@ function App() {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
@@ -61,6 +63,8 @@ function App() {
         <UserPrivateRoute exact path="/user/history" component={History} />
         <UserPrivateRoute exact path="/user/password" component={Password} />
         <UserPrivateRoute exact path="/user/wishlist" component={Wishlist} />
+
+        <AdminRoute exact path="/admin/dashboard" component={AdminDashboard} />
       </Switch>
     </>
   );

@@ -9,10 +9,7 @@ const UserPrivateRoute = ({children, ...rest}) => {
     return (
         <>
             {user && user.token ? (
-                <Route 
-                    {...rest}
-                    render={() => children}
-                />
+                <Route {...rest} />
             ) : (
                 <LoadingToRedirect />
             )}

@@ -25,10 +25,7 @@ const AdminRoute = ({children, ...rest}) => {
     return (
         <>
             {success ? (
-                <Route 
-                    {...rest}
-                    render={() => children}
-                />
+                <Route {...rest}/>
             ) : (
                 <LoadingToRedirect />
             )}
