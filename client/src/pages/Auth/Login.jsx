@@ -53,10 +53,8 @@ const Login = ({ history }) => {
                     roleBasedRedirect(res);
                 })
                 .catch((error) => console.log(error));
-
-            //   history.push("/");
+                
         } catch (error) {
-            console.log(error.message);
             toast.error(error.message);
             setLoading(false);
         }
@@ -85,10 +83,8 @@ const Login = ({ history }) => {
                 })
                 .catch((error) => {});
 
-            // history.push("/");
         }).catch((error) => {
             toast.error(error.message);
-            console.log(error.message);
         });
     };
 
