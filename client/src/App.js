@@ -13,6 +13,8 @@ import Register from './pages/Auth/Register';
 import RegisterComplete from './pages/Auth/RegisterComplete';
 import Home from './pages/Home';
 import History from './pages/user/History';
+import Password from './pages/user/Password';
+import Wishlist from './pages/user/Wishlist';
 
 
 function App() {
@@ -57,6 +59,8 @@ function App() {
         <Route exact path="/register/complete" component={RegisterComplete} />
         <Route exact path="/forgot/password" component={ForgotPassword} />
         <UserPrivateRoute exact path="/user/history" component={History} />
+        <UserPrivateRoute exact path="/user/password" component={Password} />
+        <UserPrivateRoute exact path="/user/wishlist" component={Wishlist} />
       </Switch>
     </>
   );
