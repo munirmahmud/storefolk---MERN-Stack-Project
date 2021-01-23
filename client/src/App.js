@@ -28,7 +28,7 @@ function App() {
       if(user) {
         let idTokenResult = await user.getIdTokenResult();
 
-        currentUser(idTokenResult.token)
+        await currentUser(idTokenResult.token)
             .then((res) => {
                 dispatch({
                     type: "LOGGED_IN_USER",
