@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import AdminNav from '../../../components/Nav/AdminNav';
-import { createCategory, getCategories } from '../../../helpers/category';
+import { createCategory, getCategories, removeCategory } from '../../../helpers/category';
 
 const CreateCategory = () => {
     const { user } = useSelector((state) => ({...state}));
@@ -31,6 +31,7 @@ const CreateCategory = () => {
                 setIsLoading(false);
                 setName("");
                 toast.success(`${res.data.name} is created.`);
+                loadCategory();
             })
             .catch((error) => {
                 setIsLoading(false);
@@ -38,6 +39,24 @@ const CreateCategory = () => {
                     toast.error(error.response.data);
                 }
             })
+    };
+
+    const handleRemove = (slug) => {
+        if(window.confirm("Do you want to delete the category?")) {
+            setIsLoading(true);
+            removeCategory(slug, user.token)
+                .then((res) => {
+                    setIsLoading(false);
+                    toast.success(`${res.data.name} has been deleted.`);
+                    loadCategory();
+                })
+                .catch((error) => {
+                    if(error.response.status === 4000) {
+                        setIsLoading(false);
+                        toast.error(error.response.data);
+                    }
+                });
+        }
     };
 
     return (
@@ -72,12 +91,12 @@ const CreateCategory = () => {
                     <hr/>
 
                     <ul className="nav flex-column">
-                    {categories.length > 0 && categories.map((category) => (
-                        <li className="alert alert-secondary d-flex justify-content-between" key={category._id}>
-                            <div>{category.name}</div>
+                    {categories.length > 0 && categories.map((cat) => (
+                        <li className="alert alert-secondary d-flex justify-content-between" key={cat._id}>
+                            <div>{cat.name}</div>
                             <div className="d-flex align-items-center">
-                                <DeleteOutlined className="mr-4 text-danger pointer" />
-                                <Link className="line-height-0" to={`/admin/category/${category.slug}`}>
+                                <DeleteOutlined onClick={() => handleRemove(cat.slug)} className="mr-4 text-danger pointer" />
+                                <Link className="line-height-0" to={`/admin/category/${cat.slug}`}>
                                     <EditOutlined />
                                 </Link>
                             </div>
