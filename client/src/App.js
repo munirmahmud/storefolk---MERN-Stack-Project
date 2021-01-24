@@ -9,6 +9,7 @@ import UserPrivateRoute from './components/routes/UserPrivateRoute';
 import { auth } from './config/firebase';
 import { currentUser } from './helpers/auth';
 import AdminDashboard from './pages/admin/AdminDashboard';
+import CreateCategory from './pages/admin/category/CreateCategory';
 import ForgotPassword from './pages/Auth/ForgotPassword';
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
@@ -65,6 +66,9 @@ function App() {
         <UserPrivateRoute exact path="/user/wishlist" component={Wishlist} />
 
         <AdminRoute exact path="/admin/dashboard" component={AdminDashboard} />
+
+        <AdminRoute exact path="/admin/category" component={CreateCategory} />
+        
       </Switch>
     </>
   );

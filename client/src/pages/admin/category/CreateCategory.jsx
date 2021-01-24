@@ -1,16 +1,17 @@
 import React from 'react';
-import UserNav from '../../components/Nav/UserNav';
+import AdminNav from '../../../components/Nav/AdminNav';
 
-const History = () => {
+const CreateCategory = () => {
     return (
         <div className="container-fluid mt-5">
             <div className="row">
+                
                 <div className="col-md-2">
-                    <UserNav />
+                    <AdminNav />
                 </div>
 
                 <div className="col">
-                    <h3>User Dashboard</h3>
+                    <h3>Create Category</h3>
                 </div>
 
             </div>
@@ -18,4 +19,4 @@ const History = () => {
     )
 }
 
-export default History;
+export default CreateCategory;
