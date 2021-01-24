@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { auth } from '../../config/firebase';
-import { createOrUpdateUser } from '../../helpers';
+import { createOrUpdateUser } from '../../helpers/auth';
 
 
 

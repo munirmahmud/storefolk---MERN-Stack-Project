@@ -7,7 +7,7 @@ import Header from './components/Nav/Header';
 import AdminRoute from './components/routes/AdminRoute';
 import UserPrivateRoute from './components/routes/UserPrivateRoute';
 import { auth } from './config/firebase';
-import { currentUser } from './helpers';
+import { currentUser } from './helpers/auth';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import ForgotPassword from './pages/Auth/ForgotPassword';
 import Login from './pages/Auth/Login';

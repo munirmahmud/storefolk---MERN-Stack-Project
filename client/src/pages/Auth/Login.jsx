@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { auth, googleAuthProvider } from '../../config/firebase';
-import { createOrUpdateUser } from '../../helpers';
+import { createOrUpdateUser } from '../../helpers/auth';
 
 const Login = ({ history }) => {
     const [email, setEmail] = useState("");
